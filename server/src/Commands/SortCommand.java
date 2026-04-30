@@ -17,7 +17,7 @@ public class SortCommand implements Command {
     }
 
     @Override
-    public String execute() {
+    public String execute(Object argument) {
         collectionManager.sort();
         return "Коллекция отсортирована";
     }

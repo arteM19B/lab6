@@ -18,7 +18,7 @@ public class SaveCommand implements Command {
     }
 
     @Override
-    public String execute() {
+    public String execute(Object argument) {
         collectionManager.save();
         return "Коллекция сохранена в файл на сервере.";
     }

@@ -2,11 +2,8 @@ package Commands;
 
 import Collection.Route;
 import CollectionManager.CollectionManager;
-import Exceptions.ExitException;
 import Interfases.Command;
 
-
-import java.util.Scanner;
 /**
  * Команда добавления нового элемента в коллекцию.
  * Добавляет новый маршрут, запрашивая все необходимые поля у пользователя.
@@ -18,7 +15,7 @@ public class AddCommand implements Command {
     private final CollectionManager<Long> collectionManager;
     private Route<Long> routeToAdd;
 
-    public AddCommand(CollectionManager<Long> collectionManager, Scanner scanner) {
+    public AddCommand(CollectionManager<Long> collectionManager) {
         this.collectionManager = collectionManager;
     }
 
@@ -27,8 +24,10 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public String execute() {
-        collectionManager.add(routeToAdd);
+    public String execute(Object argument) {
+        Route<Long> route = (Route<Long>) argument;
+        route.setId(collectionManager.generateNextId());
+        collectionManager.add(route);
         return "Маршрут добавлен";
     }
 

@@ -1,5 +1,7 @@
 package Interfases;
 
+import Network.Request;
+
 /**
  * Интерфейс, который реализуют все команды программы.
  * Реализует паттерн "Interfases.Command" для унифицированного выполнения действий.
@@ -8,5 +10,5 @@ package Interfases;
  * @version 1.0
  */
 public interface Command {
-    String execute();
+    String execute(Object argument);
 }

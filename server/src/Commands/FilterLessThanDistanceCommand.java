@@ -23,7 +23,7 @@ public class FilterLessThanDistanceCommand implements Command {
     }
 
     @Override
-    public String execute() {
+    public String execute(Object argument) {
         if (distance <= 1) return "Ошибка: укажите корректное расстояние (>1).";
         return collectionManager.filterLessThanDistance(distance);
     }

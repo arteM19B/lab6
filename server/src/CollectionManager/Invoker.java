@@ -1,6 +1,7 @@
 package CollectionManager;
 
 import Interfases.Command;
+import Network.Request;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +20,20 @@ public class Invoker {
 
     public Command getCommand(String name) {
         return commandsMap.get(name);
+    }
+
+    public String execute(Request request) {
+        Command command = commandsMap.get(request.getCommandName());
+
+        if (command == null) {
+            return "Неизвестная команда: " + request.getCommandName();
+        }
+
+        try {
+            return command.execute(request.getCommandArg());
+        } catch (Exception e) {
+            return "Ошибка выполнения команды " + e.getMessage();
+        }
     }
 
 }

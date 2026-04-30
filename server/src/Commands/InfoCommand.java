@@ -18,7 +18,7 @@ public class InfoCommand implements Command {
     }
 
     @Override
-    public String execute() {
+    public String execute(Object argument) {
         StringBuilder sb = new StringBuilder();
         sb.append("Тип коллекции: ").append(collectionManager.getType()).append("\n");
         sb.append("Дата инициализации: ").append(collectionManager.getInitializationTime()).append("\n");

@@ -23,7 +23,7 @@ public class RemoveAtCommand implements Command {
     }
 
     @Override
-    public String execute() {
+    public String execute(Object argument) {
         if (index < 0) {return "Ошибка: неверный индекс";}
         try {
             collectionManager.removeAt(index);

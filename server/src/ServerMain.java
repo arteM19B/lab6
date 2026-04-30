@@ -1,3 +1,6 @@
+import CollectionManager.CollectionManager;
+import CollectionManager.Invoker;
+import Commands.*;
 import Network.Request;
 import Network.Response;
 
@@ -10,6 +13,18 @@ import java.nio.channels.DatagramChannel;
 public class ServerMain {
     private static final int PORT = 1234;
     public static void main(String[] args) {
+        CollectionManager<Long> collectionManager= new CollectionManager<Long>("collection.xml");
+        collectionManager.load();
+
+        Invoker invoker = new Invoker();
+
+        invoker.registerCommand("show", new ShowCommand(collectionManager));
+        invoker.registerCommand("add", new AddCommand(collectionManager));
+        invoker.registerCommand("clear", new ClearCommand(collectionManager));
+        invoker.registerCommand("remove_by_id", new RemoveIdCommand(collectionManager));
+
+
+
         try (DatagramChannel channel = DatagramChannel.open()) {
             channel.configureBlocking(false);
             channel.bind(new InetSocketAddress(PORT));

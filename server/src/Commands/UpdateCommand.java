@@ -30,7 +30,7 @@ public class UpdateCommand implements Command {
     };
 
     @Override
-    public String execute() {
+    public String execute(Object argument) {
         if (id <= 0 || newRoute == null) {
             return "Ошибка: ID или данные не получены";
         }

@@ -18,7 +18,7 @@ public class RemoveLastCommand implements Command {
     }
 
     @Override
-    public String execute() {
+    public String execute(Object argument) {
         if (collectionManager.getCollection().isEmpty()) return "Коллекция пуста";
         collectionManager.remove_last();
         return "Последний элемент удалён";

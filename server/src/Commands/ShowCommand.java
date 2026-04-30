@@ -18,7 +18,7 @@ public class ShowCommand implements Command {
     }
 
     @Override
-    public String execute() {
+    public String execute(Object argument) {
         if (collectionManager.getCollection().isEmpty()) {
             return "Коллекция пуста";
         }

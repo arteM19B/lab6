@@ -21,7 +21,7 @@ public class RemoveIdCommand implements Command {
     }
 
     @Override
-    public String execute() {
+    public String execute(Object argument) {
         boolean found = collectionManager.getCollection().removeIf(route -> route.getId().equals(id));
         return found ? "Элемент с ID " + id + " удален." : "Элемент с ID " + id + " не найден.";
     }

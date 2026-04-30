@@ -18,7 +18,7 @@ public class HelpCommand implements Command {
     }
 
     @Override
-    public String execute() {
+    public String execute(Object argument) {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, Command> entry : commands.entrySet()) {
             sb.append(entry.getKey()).append(" -- ").append(entry.getValue().toString()).append("\n");

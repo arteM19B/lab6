@@ -18,7 +18,7 @@ public class ClearCommand implements Command {
     }
 
     @Override
-    public String execute() {
+    public String execute(Object argument) {
         collectionManager.clear();
         return "Коллекция очищена";
     }
