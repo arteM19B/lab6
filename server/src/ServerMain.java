@@ -18,7 +18,7 @@ public class ServerMain {
     private static final int PORT = 1234;
 
     public static void main(String[] args) {
-        CollectionManager<Long> collectionManager = new CollectionManager<>("collection.xml");
+        CollectionManager<Long> collectionManager = new CollectionManager<Long>("collection.xml");
         collectionManager.load();
 
         Invoker invoker = new Invoker();
