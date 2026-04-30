@@ -1,6 +1,5 @@
 package Commands;
 
-import Collection.Route;
 import CollectionManager.CollectionManager;
 import Interfases.Command;
 
@@ -14,7 +13,6 @@ import java.util.Iterator;
  */
 public class RemoveIdCommand implements Command {
     private final CollectionManager<Long> collectionManager;
-    private Long id;
 
     public RemoveIdCommand(CollectionManager<Long> collectionManager) {
         this.collectionManager = collectionManager;
@@ -22,16 +20,19 @@ public class RemoveIdCommand implements Command {
 
     @Override
     public String execute(Object argument) {
-        boolean found = collectionManager.getCollection().removeIf(route -> route.getId().equals(id));
-        return found ? "Элемент с ID " + id + " удален." : "Элемент с ID " + id + " не найден.";
-    }
+        Long id;
+        try {
+            id = Long.parseLong(argument.toString());
+        } catch (Exception e) {
+            return "Ошибка: укажите ID";
+        }
 
-    public void setArgument(Long id) {
-        this.id = id;
+        boolean found = collectionManager.getCollection().removeIf(route -> route.getId().equals(id));
+        return found ? "Элемент с ID " + id + " удалён" : "Элемент с ID " + id + " не найден";
     }
 
     @Override
     public String toString() {
-        return "Удалить элемент из коллекции по его id";
+        return "удалить элемент по id";
     }
 }

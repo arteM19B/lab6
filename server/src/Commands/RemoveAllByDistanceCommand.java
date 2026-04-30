@@ -13,18 +13,19 @@ import Interfases.Command;
 public class RemoveAllByDistanceCommand implements Command {
 
     private final CollectionManager<Long> collectionManager;
-    private long distance = -1;
 
     public RemoveAllByDistanceCommand(CollectionManager<Long> collectionManager) {
         this.collectionManager = collectionManager;
     }
 
-    public void setArgument(long distance) {
-        this.distance = distance;
-    }
-
     @Override
     public String execute(Object argument) {
+        long distance;
+        try {
+            distance = Long.parseLong(argument.toString());
+        } catch (Exception e) {
+            return "Ошибка: укажите distance";
+        }
         if (distance <= 1) return "Ошибка: укажите корректное расстояние (>1).";
 
         int count = collectionManager.removeAllByDistance(distance);

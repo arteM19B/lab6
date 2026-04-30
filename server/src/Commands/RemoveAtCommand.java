@@ -12,29 +12,30 @@ import Interfases.Command;
  */
 public class RemoveAtCommand implements Command {
     private final CollectionManager<Long> collectionManager;
-    private int index = -1;
 
     public RemoveAtCommand(CollectionManager<Long> collectionManager) {
         this.collectionManager = collectionManager;
     }
 
-    public void setArgument(int index){
-        this.index = index;
-    }
-
     @Override
     public String execute(Object argument) {
-        if (index < 0) {return "Ошибка: неверный индекс";}
+        int index;
         try {
-            collectionManager.removeAt(index);
-            return "Элемент по индексу " + index + " успешно удалён.";
-        } catch (IndexOutOfBoundsException e) {
-            return "Ошибка: элемента с таким индексом не существует.";
+            index = Integer.parseInt(argument.toString());
+        } catch (Exception e) {
+            return "Ошибка: укажите индекс";
         }
+
+        if (index < 0 || index >= collectionManager.size()) {
+            return "Ошибка: элемента с таким индексом не существует";
+        }
+
+        collectionManager.removeAt(index);
+        return "Элемент по индексу " + index + " удалён";
     }
 
     @Override
     public String toString() {
-        return "удалить элемент, находящийся в заданной позиции коллекции (index)";
+        return "удалить элемент по индексу";
     }
 }

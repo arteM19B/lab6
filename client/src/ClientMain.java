@@ -1,5 +1,6 @@
 import Network.Request;
 import Network.Response;
+import Network.UpdateArgument;
 
 import java.io.*;
 import java.net.DatagramPacket;
@@ -32,6 +33,19 @@ public class ClientMain {
                 Object argument = null;
                 if (commandName.equals("add")) {
                     argument = routeBuilder.build();
+                } else if (commandName.equals("update")) {
+                    if (parts.length < 2) {
+                        System.out.println("Ошибка: укажите ID");
+                        continue;
+                    }
+                    Long id;
+                    try {
+                        id = Long.parseLong(parts[1]);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Ошибка: ID должен быть числом");
+                        continue;
+                    }
+                    argument = new UpdateArgument(id, routeBuilder.build());
                 } else if (parts.length > 1) {
                     argument = parts[1];
                 }

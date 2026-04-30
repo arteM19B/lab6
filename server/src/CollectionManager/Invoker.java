@@ -22,6 +22,10 @@ public class Invoker {
         return commandsMap.get(name);
     }
 
+    public Map<String, Command> getCommandsMap() {
+        return commandsMap;
+    }
+
     public String execute(Request request) {
         Command command = commandsMap.get(request.getCommandName());
 

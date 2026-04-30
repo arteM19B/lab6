@@ -13,18 +13,16 @@ import Interfases.Command;
  */
 public class AddCommand implements Command {
     private final CollectionManager<Long> collectionManager;
-    private Route<Long> routeToAdd;
 
     public AddCommand(CollectionManager<Long> collectionManager) {
         this.collectionManager = collectionManager;
     }
 
-    public void setArg(Object arg) {
-        this.routeToAdd = (Route<Long>) arg;
-    }
-
     @Override
     public String execute(Object argument) {
+        if (!(argument instanceof Route)) {
+            return "Ошибка: для add нужен объект Route";
+        }
         Route<Long> route = (Route<Long>) argument;
         route.setId(collectionManager.generateNextId());
         collectionManager.add(route);

@@ -2,8 +2,8 @@ package Commands;
 
 import Collection.Route;
 import CollectionManager.CollectionManager;
-import Exceptions.ExitException;
 import Interfases.Command;
+import Network.UpdateArgument;
 
 import java.util.Scanner;
 /**
@@ -15,37 +15,37 @@ import java.util.Scanner;
  */
 public class UpdateCommand implements Command {
     private final CollectionManager<Long> collectionManager;
-    private Long id = -1L;
-    private Route<Long> newRoute = null;
 
     public UpdateCommand(CollectionManager<Long> collectionManager) {
         this.collectionManager = collectionManager;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public void setNewRoute(Route<Long> newRoute) {
-        this.newRoute = newRoute;
-    };
-
     @Override
     public String execute(Object argument) {
-        if (id <= 0 || newRoute == null) {
-            return "Ошибка: ID или данные не получены";
+        if (!(argument instanceof UpdateArgument)) {
+            return "Ошибка: для update нужны ID и объект Route";
         }
+
+        UpdateArgument updateArgument = (UpdateArgument) argument;
+        Long id = updateArgument.getId();
+        Route<Long> newRoute = updateArgument.getRoute();
+
+        if (id == null || id <= 0 || newRoute == null) {
+            return "Ошибка: ID или данные маршрута не получены";
+        }
+
         Route<Long> existing = collectionManager.getById(id);
-        if (existing == null) {return "Маршрут с ID " + id + " не найден";}
+        if (existing == null) {
+            return "Маршрут с ID " + id + " не найден";
+        }
 
         newRoute.setId(id);
         collectionManager.update(id, newRoute);
-        return "Маршрут с ID " + id + " успешно добавлен";
+        return "Маршрут с ID " + id + " обновлён";
     }
 
     @Override
     public String toString() {
-        return "обновить значение элемента коллекции, id которого равен заданному";
+        return "обновить элемент коллекции по id";
     }
-
-
 }
