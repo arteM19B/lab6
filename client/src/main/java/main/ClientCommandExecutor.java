@@ -65,10 +65,10 @@ public class ClientCommandExecutor {
             printClientHelp(commandType.get());
         } catch (SocketTimeoutException e) {
             System.err.println("Server is temporarily unavailable. Try again later.");
-            logger.warn("Server response timeout", e);
+            logger.warn("Server response timeout");
         } catch (Exception e) {
             System.err.println("Could not process server response: " + e.getMessage());
-            logger.error("Network or serialization error", e);
+            logger.error("Network or serialization error");
         }
     }
 
